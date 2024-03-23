@@ -58,11 +58,14 @@ class DumbEmbedder(Embeddings):
 class CustomOpenAIEmbeddings(OpenAIEmbeddings):
     """Use LLAMA2 as embedder by calling a self-hosted lama-cpp-python instance.
     """
-    base_url: str
-    api_key: str
-    model: str
-    def __init__(self, url):
-        self.url = os.path.join(url, "v1/embeddings")
+    
+    def __init__(self, **kwargs):
+        super().__init__(
+            openai_api_key=kwargs['api_key'],
+            model=kwargs['model'],
+            **kwargs
+        )
+        self.openai_api_base = kwargs['base_url']
 
     def embed_documents(self, texts: List[str]) -> List[List[float]]:
         payload = json.dumps({"input": texts})
