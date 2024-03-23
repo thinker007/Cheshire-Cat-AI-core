@@ -78,7 +78,6 @@ class LLMCustom(LLM):
 
 
 class CustomOpenAI(OpenAI):
-    base_url: str
 
     def __init__(self, **kwargs):
         super().__init__(
@@ -87,7 +86,7 @@ class CustomOpenAI(OpenAI):
             **kwargs
         )
 
-        self.openai_api_base = kwargs['base_url']
+        self.openai_api_base = kwargs['url']
 
 
 class CustomOllama(Ollama):
