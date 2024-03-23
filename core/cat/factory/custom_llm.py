@@ -78,26 +78,16 @@ class LLMCustom(LLM):
 
 
 class CustomOpenAI(OpenAI):
-    url: str
+    base_url: str
 
     def __init__(self, **kwargs):
-        model_kwargs = {
-            'repeat_penalty': kwargs.pop('repeat_penalty'),
-            'top_k': kwargs.pop('top_k')
-        }
-
-        stop = kwargs.pop('stop', None)
-        if stop:
-            model_kwargs['stop'] = stop.split(',')
-
         super().__init__(
-            openai_api_key=" ",
-            model_kwargs=model_kwargs,
+            openai_api_key=kwargs['api_key'],
+            model_kwargs={},
             **kwargs
         )
 
-        self.url = kwargs['url']
-        self.openai_api_base = os.path.join(self.url, "v1")
+        self.openai_api_base = kwargs['base_url']
 
 
 class CustomOllama(Ollama):
