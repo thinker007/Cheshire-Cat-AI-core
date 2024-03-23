@@ -79,7 +79,7 @@ class LLMCustomConfig(LLMSettings):
 
 
 class LLMOpenAICompatibleConfig(LLMSettings):
-    url: str
+    base_url: str
     temperature: float = 0.01
     model_name: str
     api_key: str
