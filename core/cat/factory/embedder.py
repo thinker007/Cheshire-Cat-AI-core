@@ -60,7 +60,9 @@ class EmbedderDumbConfig(EmbedderSettings):
 
 
 class EmbedderOpenAICompatibleConfig(EmbedderSettings):
-    url: str
+    api_key: str
+    base_url: str
+    model: str = "text-embedding-ada-002"
     _pyclass: Type = CustomOpenAIEmbeddings
 
     model_config = ConfigDict(
