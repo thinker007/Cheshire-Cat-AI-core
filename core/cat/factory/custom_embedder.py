@@ -7,6 +7,9 @@ from itertools import combinations
 from collections import OrderedDict
 from sklearn.feature_extraction.text import CountVectorizer
 from langchain_core.embeddings import Embeddings
+from langchain_openai import OpenAIEmbeddings
+
+
 import httpx
 
 
@@ -52,10 +55,12 @@ class DumbEmbedder(Embeddings):
 
 
 
-class CustomOpenAIEmbeddings(Embeddings):
+class CustomOpenAIEmbeddings(OpenAIEmbeddings):
     """Use LLAMA2 as embedder by calling a self-hosted lama-cpp-python instance.
     """
-    
+    base_url: str
+    api_key: str
+    model: str
     def __init__(self, url):
         self.url = os.path.join(url, "v1/embeddings")
 
